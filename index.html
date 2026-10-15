@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Matemática en Ruta: ¡Llega a la meta!</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Fondo decorativo con símbolos matemáticos -->
+  <div class="bg" aria-hidden="true">
+    <span style="left:4%;top:14%">＋</span><span style="left:90%;top:10%">π</span><span style="left:12%;top:70%">÷</span>
+    <span style="left:84%;top:62%">%</span><span style="left:48%;top:4%">×</span><span style="left:94%;top:88%">−</span>
+    <span style="left:30%;top:90%">√</span><span style="left:2%;top:44%">=</span>
+  </div>
+
+  <!-- ENCABEZADO -->
+  <header class="top">
+    <div class="brand">
+      <svg class="mascot" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="38" rx="20" ry="22" fill="#8B5CF6"/><circle cx="23" cy="32" r="9" fill="#fff"/><circle cx="41" cy="32" r="9" fill="#fff"/><circle cx="24" cy="33" r="4" fill="#16233B"/><circle cx="40" cy="33" r="4" fill="#16233B"/><path d="M28 40L32 47L36 40Z" fill="#FBBF24"/><path d="M8 18L32 8L56 18L32 28Z" fill="#16233B"/><path d="M50 20V34" stroke="#FBBF24" stroke-width="3"/></svg>
+      <div>
+      <h1>Matemática en Ruta</h1>
+      <p class="subtitle">¡Llega a la meta! · Taller de TIC para las Matemáticas</p>
+      </div>
+    </div>
+    <button id="btnReiniciar" class="btn btn-ghost" type="button">Reiniciar partida</button>
+  </header>
+
+  <main class="layout">
+
+    <!-- TABLERO (las casillas las genera script.js) -->
+    <section class="board-wrap" aria-label="Tablero de juego">
+      <div id="board" class="board"></div>
+      <div id="startPad" class="start-pad">
+        <strong>🚩 INICIO</strong>
+        <div class="tokens" id="startTokens"></div>
+      </div>
+    </section>
+
+    <!-- PANEL LATERAL -->
+    <aside class="side">
+
+      <!-- Jugadores / equipos con progreso -->
+      <div class="players" aria-label="Jugadores">
+        <article class="player-card" id="card0">
+          <span class="dot p0" aria-hidden="true">🦊</span>
+          <div class="player-info">
+            <input class="name" id="name0" value="Equipo Azul" maxlength="20" aria-label="Nombre del jugador 1">
+            <div class="bar"><i id="bar0"></i></div>
+            <small id="prog0">Casilla 0 / 20</small>
+          </div>
+        </article>
+        <article class="player-card" id="card1">
+          <span class="dot p1" aria-hidden="true">🐧</span>
+          <div class="player-info">
+            <input class="name" id="name1" value="Equipo Naranja" maxlength="20" aria-label="Nombre del jugador 2">
+            <div class="bar"><i id="bar1"></i></div>
+            <small id="prog1">Casilla 0 / 20</small>
+          </div>
+        </article>
+      </div>
+
+      <!-- Turno, dado y mensajes -->
+      <div class="turn-panel">
+        <p class="turn-label">Turno de</p>
+        <p id="turnName" class="turn-name">—</p>
+        <div id="dice" class="dice" aria-label="Dado" role="img"></div>
+        <button id="btnLanzar" class="btn btn-main" type="button">🎲 Lanzar dado</button>
+        <p id="mensaje" class="message" role="status" aria-live="polite"></p>
+      </div>
+
+      <!-- Leyenda de casillas especiales -->
+      <ul class="legend">
+        <li><span class="chip bonus">⭐ BONUS</span> Pregunta extra: +2 casillas</li>
+        <li><span class="chip timer">⏱️ CONTRARRELOJ</span> 15 segundos para responder</li>
+        <li><span class="chip challenge">🎯 DESAFÍO</span> Pregunta más difícil: +3 casillas</li>
+      </ul>
+    </aside>
+  </main>
+
+  <!-- VENTANA DE PREGUNTA -->
+  <div id="modal" class="overlay" hidden>
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="qText">
+      <div class="dialog-head">
+        <span id="qTag" class="chip"></span>
+        <span id="qCat" class="qcat"></span>
+      </div>
+      <div id="timerWrap" class="timer-wrap" hidden><i id="timerBar"></i></div>
+      <h2 id="qText" class="q-text"></h2>
+      <div id="qOptions" class="options"></div>
+      <div id="feedback" class="feedback" hidden></div>
+      <button id="btnContinuar" class="btn btn-main" type="button" hidden>Continuar</button>
+    </div>
+  </div>
+
+  <!-- PANTALLA FINAL -->
+  <div id="winScreen" class="overlay win" hidden>
+    <div class="confetti" id="confetti" aria-hidden="true"></div>
+    <div class="dialog win-dialog" role="dialog" aria-modal="true" aria-labelledby="winName">
+      <p class="trophy" aria-hidden="true">🏆</p>
+      <p class="win-label">¡Llegó a la meta!</p>
+      <h2 id="winName"></h2>
+      <p class="win-text">¡Felicitaciones por resolver el recorrido matemático!</p>
+      <button id="btnNueva" class="btn btn-main" type="button">Jugar otra vez</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
